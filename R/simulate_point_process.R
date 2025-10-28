@@ -16,6 +16,7 @@ simulate_point_process <- function(spatial_association,
                                    ) {
   # initialize species locations
   num_initial <- 2
+  #determine how many indiviudal in each species are there
   species_location <- 1:gamma %>%
     map(~ matrix(runif(2 * num_initial, min = 0, max = 1), # Generates random uniform unmber between 0 and 1 and 2*num_initial such numbers
       nrow = num_initial, ncol = 2
@@ -27,7 +28,7 @@ simulate_point_process <- function(spatial_association,
 
   for (i in 1:length(species_location)) {
     colnames(species_location[[i]]) <- c("x", "y")
-  }
+  }f
     #the loop goes through each matrix in the list
     #for each species, we assigns column names x and y to that species' location matrix
 
@@ -49,10 +50,13 @@ simulate_point_process <- function(spatial_association,
     )
     species_location[[invader]] <- species_location[[invader]] %>%
       rbind(winner)
-    #this calls the sample_spatial point function, check that file for more detail
+    #this calls the sample_spatial point function, and added in the coordinates
   }
+  #then the process is repreated Npoints times to ensure that Npoints points are added
+  #the number of each species added are equally dispersed as well
 
   species_location %>%
     map(as_tibble) %>%
     bind_rows(.id = "species")
+  #this step is to add species name into the process
 }
