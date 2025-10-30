@@ -8,7 +8,7 @@
 #' @export
 sample_spatial_point <- function(species_location,
                                  spatial_association,
-                                 gamma,
+                                 gamma, #=nrow(spatial_association)
                                  invading_species,
                                  num_candidates,
                                  radius,
@@ -19,7 +19,7 @@ sample_spatial_point <- function(species_location,
     nrow = num_candidates, ncol = 2
   ) #This is to generate a matrix of potential coordiantes where the invader spceies could be added into the map
 
-  if(length(radius) == 1){.
+  if(length(radius) == 1){
     counts <- species_location %>%
       map(~ fields::rdist(candidates, .)) %>%
       map(~ apply(., 1, function(x) sum(x < radius))) #if the radius for every species' pair's interaction is the same, then we calculate the interacting ones with each candidaite coordinates
