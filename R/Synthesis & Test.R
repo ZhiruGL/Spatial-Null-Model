@@ -2,7 +2,7 @@ library(ggplot2)
 # Create a 3x3 interaction matrix
 set.seed(123)  # optional, for reproducibility
 
-dcf <- matrix(runif(9, min =-10, max = 10), nrow = 3)
+dcf <- matrix(runif(9, min =-1, max = 1), nrow = 3)
 
 # Assign row and column names
 rownames(dcf) <- c("dog", "cat", "fly")
